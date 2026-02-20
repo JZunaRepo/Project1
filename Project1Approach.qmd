@@ -1,0 +1,36 @@
+---
+title: "Project 1"
+author: "Jonnathan Zuna Largo"
+format: html
+editor: visual
+---
+
+## Introduction
+
+For this project we were given a txt file containing chess tournament results. The goal is to extract the data of each player and organize it into clean structure data (csv) that can be imported into a SQL database or used for further analysis. The data contains information such as: name, state, total points earned, and ratings of every opponent they have faced during the tournament.
+
+The core challenge is that the raw file isn't a spreadsheet. It is semi-structured data where each player's information spans multiple lines, ratings are embedded withing longer strings, and opponent data has is cross-referenced across player. This is a data wrangling and parsing problem.
+
+The final output for each player will include the fields: Player's Name, Player's Number, Total Number of Points, Player's Pre-rating, Player's Post-rating, and Average-PreChess Rating of each opponent.
+
+## Approach
+
+I'm going to break down this project into two components.
+
+-   <div>
+
+    1.  Parsing and cleaning the raw text file to extract the six required fields for all the players
+
+    </div>
+
+-   <div>
+
+    2.  Computing the average opponent pre-rating by adding all the opponent's pre-rating and diving it by the total opponents each player played. I will only consider W,L,D
+
+    </div>
+
+The strategy is to recognize the repeating lines structure of the data. Using regular expressions, I can extract each piece of information regardless of the inconsistent spacing in the file. After the file is cleaned then computing the average opponent rating will be mapping each opponent's player number.
+
+## Roadblocks
+
+The text file format is the biggest obstacle in this project. The data spans in two lines for each player with separator rows in between so the parsing needs to be identified and skip the divider lines. Another challenge pointed out in the explanation video is handling cases where players with double digit or where player had a bye or unplayed game which has to be excluded from the opponent rating average. There are even cases where players have a provisional rating so I also have to remove those from the values to then create a numeric column.
